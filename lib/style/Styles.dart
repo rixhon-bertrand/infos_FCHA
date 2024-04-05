@@ -31,4 +31,31 @@ class Styles {
       ),
     ],
   );
+  static const BoxDecoration messageBox = BoxDecoration(
+    color: Colors.lightBlueAccent,
+    borderRadius: BorderRadius.only(
+      topLeft: Radius.circular(20.0),
+      topRight: Radius.circular(20.0),
+      bottomRight: Radius.circular(20.0),
+    ),
+  );
+
+  static const TextStyle messageTextStyle = TextStyle(
+    color: Colors.white,
+    fontSize: 16.0,
+  );
+
+  static BoxDecoration getTimeBoxDecoration(bool isCurrentUser) {
+    return BoxDecoration(
+      color: isCurrentUser ? Colors.green : Colors.grey.withOpacity(0.5),
+      borderRadius: BorderRadius.circular(5.0),
+    );
+  }
+
+  static TextStyle getTimeTextStyle(bool isCurrentUser) {
+    return TextStyle(
+      color: isCurrentUser ? Colors.white : Colors.black,
+      fontSize: 12.0,
+    );
+  }
 }

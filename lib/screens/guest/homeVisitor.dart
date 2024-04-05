@@ -1,18 +1,18 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:athle_pour_tous/routes/route.dart';
 
 import '../../constantes/methods.dart';
 import '../../db/database.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class HomeVisitor extends StatefulWidget {
+  const HomeVisitor({Key? key}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  _HomeVisitorState createState() => _HomeVisitorState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeVisitorState extends State<HomeVisitor> {
   late List<String> items;
 
   @override
@@ -28,7 +28,6 @@ class _HomeState extends State<Home> {
       items = fetchedGroups;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +55,14 @@ class _HomeState extends State<Home> {
               Navigator.pushNamed(context, kAuthScreen);
             },
           ),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.admin_panel_settings, color: Colors.black), // Bouton admin pour se logger
+              onPressed: () {
+                Navigator.pushNamed(context, kAuthScreen);//TODO changer par la fenetre guest
+              },
+            ),
+          ],
         ),
         body: ListView.builder(
           itemCount: items.length,
@@ -72,9 +79,11 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 title: Text(items[index]),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.blue,
+                trailing: IconButton(
+                  icon: Icon(Icons.notifications), // Icône pour activer ou désactiver les notification
+                  onPressed: () {
+                    // TODO Gérer l'activation ou la désactivation des notifications
+                  },
                 ),
                 onTap: () {
                   Navigator.pushNamed(context, kDialogScreen, arguments: items[index]); //ouvrir la conversation
@@ -83,20 +92,6 @@ class _HomeState extends State<Home> {
             );
           },
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            showAddGroupDialog(context, (String newGroupName) {
-              setState(() {
-                items.add(newGroupName);
-              });
-            });
-          },
-          backgroundColor: Colors.green, // Couleur de fond verte
-          foregroundColor: Colors.black,
-          child: const Icon(Icons.add), // Couleur de l'icône noire
-        ),
-
-        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       ),
     );
   }

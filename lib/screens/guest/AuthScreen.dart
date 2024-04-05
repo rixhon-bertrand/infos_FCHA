@@ -1,4 +1,3 @@
-import 'package:athle_pour_tous/style/Styles.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +25,18 @@ class _AuthScreenState extends State<AuthScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          titleSpacing: 0.0,
+          elevation: 0,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            color: Colors.black,
+            onPressed: () {
+              Navigator.pushNamed(context, kHomeVisitorScreen); // Retour à l'écran visiteur
+            },
+          ), // Titre de l'écran
+        ),
         body: Center(
           child: SingleChildScrollView(
             // centre les elements et pousse le contenu quand on ecrit avec le clavier
@@ -33,8 +44,11 @@ class _AuthScreenState extends State<AuthScreen> {
               horizontal: 30.0,
             ),
             child: Container(
-              padding: Styles.paddingAll30,
-              decoration: Styles.whiteBox,
+              padding: const EdgeInsets.all(30.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20.0),
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -43,12 +57,10 @@ class _AuthScreenState extends State<AuthScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        RichText(
-                          text: const TextSpan(
-                            text: 'Entrez votre mail :',
-                            style: TextStyle(
-                              color: Colors.black,
-                            ),
+                        Text(
+                          'Entrez votre mail :',
+                          style: TextStyle(
+                            color: Colors.black,
                           ),
                         ),
                         const SizedBox(
@@ -115,12 +127,10 @@ class _AuthScreenState extends State<AuthScreen> {
                           onTap: () {
                             Navigator.pushNamed(context, kResetPassword);
                           },
-                          child: RichText(
-                            text: const TextSpan(
-                              text: 'Mot de passe oublié ?  Cliquez ici !',
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
+                          child: Text(
+                            'Mot de passe oublié ?  Cliquez ici !',
+                            style: TextStyle(
+                              color: Colors.black,
                             ),
                           ),
                         ),
@@ -129,39 +139,39 @@ class _AuthScreenState extends State<AuthScreen> {
                         ),
                         ElevatedButton(
                           onPressed: _password.length < 6 ||
-                                  !emailRegex.hasMatch(_email)
+                              !emailRegex.hasMatch(_email)
                               ? null
                               : () async {
-                                  if (_kFormMail.currentState!.validate() &&
-                                      EmailValidator.validate(_email)) {
-                                    try {
-                                      await FirebaseAuth.instance
-                                          .signInWithEmailAndPassword(
-                                        email: _email,
-                                        password: _password,
-                                      )
-                                          .then((value) {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                            content: Text('Login réussi !'),
-                                          ),
-                                        );
-                                        Navigator.pushNamed(
-                                            context, kHomeScreen);
-                                      });
-                                    } on FirebaseAuthException catch (e) {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(SnackBar(
-                                        content: Text(
-                                          errors[e.code]!,
-                                          style: const TextStyle(
-                                              color: Colors.white),
-                                        ),
-                                      ));
-                                    }
-                                  }
-                                },
+                            if (_kFormMail.currentState!.validate() &&
+                                EmailValidator.validate(_email)) {
+                              try {
+                                await FirebaseAuth.instance
+                                    .signInWithEmailAndPassword(
+                                  email: _email,
+                                  password: _password,
+                                )
+                                    .then((value) {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Login réussi !'),
+                                    ),
+                                  );
+                                  Navigator.pushNamed(
+                                      context, kHomeScreen);
+                                });
+                              } on FirebaseAuthException catch (e) {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content: Text(
+                                    errors[e.code]!,
+                                    style: const TextStyle(
+                                        color: Colors.white),
+                                  ),
+                                ));
+                              }
+                            }
+                          },
                           child: Text(
                             'Login'.toUpperCase(),
                           ),
@@ -172,9 +182,9 @@ class _AuthScreenState extends State<AuthScreen> {
                               ? null
                               : () async {
                             if (_kFormMail.currentState!.validate())
-                              {
-                                  // TO DO
-                              }
+                            {
+                              // TO DO
+                            }
                           },
                           child: const Text(
                             'Créer un compte',

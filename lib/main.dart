@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
                     canvasColor: Colors.transparent,
                     primaryColor: Colors.indigo),
                 initialRoute: FirebaseAuth.instance.currentUser == null
-                    ? kAuthScreen
+                    ? kHomeVisitorScreen
                     : kHomeScreen,
                 routes: router,
               ),decoration: const BoxDecoration(
