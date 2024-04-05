@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "362996327689",
+    "project_id": "athlepourtous",
+    "storage_bucket": "athlepourtous.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362996327689:android:5106b502ffeb353efedfd8",
+        "android_client_info": {
+          "package_name": "com.example.athle_pour_tous"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362996327689-6a9235b9s800oinr9h4nkej3ed9j01cf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYlS1o_lO8RCliMUouhx8Rg9e8E9-UT_c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "362996327689-6a9235b9s800oinr9h4nkej3ed9j01cf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
